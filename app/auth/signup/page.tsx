@@ -1,8 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -41,6 +44,7 @@ export default function SignupPage() {
       }
 
       setSuccess(true);
+      router.push('/')
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -77,7 +81,7 @@ export default function SignupPage() {
                 name="email"
                 id="email"
                 required
-                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500 text-black"
                 value={userData.email}
                 onChange={handleInputChange}
               />
@@ -94,7 +98,7 @@ export default function SignupPage() {
                 name="password"
                 id="password"
                 required
-                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500 text-black"
                 value={userData.password}
                 onChange={handleInputChange}
               />
@@ -114,9 +118,9 @@ export default function SignupPage() {
         )}
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{' '}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <Link href="/auth/login" className="text-blue-500 hover:underline">
             Login here
-          </a>
+          </Link>
         </p>
       </div>
     </div>
